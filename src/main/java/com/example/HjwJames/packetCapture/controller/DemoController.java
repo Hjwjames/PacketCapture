@@ -1,15 +1,16 @@
 package com.example.HjwJames.packetCapture.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@RequestMapping("/captureController")
-public class captureController {
+@RequestMapping("/demo")
+public class DemoController {
     @RequestMapping(value="/demo",method = RequestMethod.GET)
     public String demo(){
         String result = "<h1>Capture from http://news.qq.com/world_index.shtml</h1></br>";
@@ -29,7 +30,7 @@ public class captureController {
         return result;
     }
 
-    @RequestMapping(value="/qq",method = RequestMethod.GET)
+    @RequestMapping(value="/qqw",method = RequestMethod.GET)
     public String qq(){
         String result = "<h1>Capture from https://new.qq.com/ch/world/</h1></br>";
         try {
@@ -49,5 +50,4 @@ public class captureController {
         }
         return result;
     }
-
 }
