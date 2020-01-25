@@ -1,5 +1,6 @@
 package com.example.HjwJames.packetCapture.service;
 
+import com.example.HjwJames.packetCapture.bean.CaptureData;
 import com.example.HjwJames.packetCapture.bean.CssQuery;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -43,10 +44,9 @@ public interface PacketCaptureService {
 
     /**
      * 获取结果集
-     * @param i
      * @param resultList
      * @param innerElements
      * @return
      */
-    public String getResult(int i ,List<CssQuery>  resultList,Elements innerElements);
+    public String getResult(List<CssQuery>  resultList, Elements innerElements, CaptureData captureData);
 }
