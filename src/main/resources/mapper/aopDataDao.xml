@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.HjwJames.packetCapture.dao.AopDataDao">
+    <sql id="table">AOP_DATA</sql>
+    <sql id="selectFields">ID,CLASS_NAME,FUNCTION_NAME,DESCRIPTION,CREATE_DATE</sql>
+    <select id="getAopDateById" parameterType="java.lang.Integer" resultType="com.example.HjwJames.packetCapture.bean.AopData">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        AOP_DATA
+        WHERE
+        id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.example.HjwJames.packetCapture.bean.AopData">
+        insert into AOP_DATA (
+        <if test="className!=null and className!=''">CLASS_NAME,</if>
+        <if test="functionName!=null and functionName!=''">FUNCTION_NAME,</if>
+        <if test="description!=null and description!=''">DESCRIPTION,</if>
+        CREATE_DATE
+        )
+        values(
+        <if test="className!=null and className!=''">#{className},</if>
+        <if test="functionName!=null and functionName!=''">#{functionName},</if>
+        <if test="description!=null and description!=''">#{description},</if>
+        NOW())
+    </insert>
+</mapper>

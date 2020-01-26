@@ -12,7 +12,6 @@ public class CronSchedulerJob {
     @Autowired
     private SchedulerFactoryBean schedulerFactoryBean;
 
-
     private void scheduleJob1(Scheduler scheduler) throws SchedulerException {
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class) .withIdentity("job1", "group1").build();
         // 2秒执行一次
@@ -34,7 +33,7 @@ public class CronSchedulerJob {
     }
 
     /**
-     * @Author Smith
+     * @Author HjwJames
      * @Description 同时启动两个定时任务
      * @Date 16:31 2019/1/24
      * @Param
@@ -42,7 +41,7 @@ public class CronSchedulerJob {
      **/
     public void scheduleJobs() throws SchedulerException {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
-        scheduleJob1(scheduler);
+        //scheduleJob1(scheduler);
         scheduleJob2(scheduler);
     }
 }
