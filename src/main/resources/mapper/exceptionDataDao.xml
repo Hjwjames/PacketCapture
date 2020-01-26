@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.HjwJames.packetCapture.dao.ExceptionDataDao">
+    <sql id="table">Exception_Data</sql>
+    <sql id="selectFields">ID,CLASS_NAME,FUNCTION_NAME,EXCEPTION,DESCRIPTION,CREATE_TIME</sql>
+    <select id="getExceptionDateById" parameterType="java.lang.Integer" resultType="com.example.HjwJames.packetCapture.bean.ExceptionData">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        Exception_Data
+        WHERE
+        id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.example.HjwJames.packetCapture.bean.ExceptionData">
+        insert into Exception_Data (
+        <if test="className!=null and className!=''">CLASS_NAME,</if>
+        <if test="functionName!=null and functionName!=''">FUNCTION_NAME,</if>
+        <if test="exception!=null and exception!=''">EXCEPTION,</if>
+        <if test="description!=null and description!=''">DESCRIPTION,</if>
+        CREATE_TIME
+        )
+        values(
+        <if test="className!=null and className!=''">#{className},</if>
+        <if test="functionName!=null and functionName!=''">#{functionName},</if>
+        <if test="exception!=null and exception!=''">#{exception},</if>
+        <if test="description!=null and description!=''">#{description},</if>
+        NOW())
+    </insert>
+</mapper>

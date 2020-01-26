@@ -1,8 +1,9 @@
 package com.example.HjwJames.packetCapture.service.impl;
 
 import com.example.HjwJames.packetCapture.bean.CaptureData;
-import com.example.HjwJames.packetCapture.bean.CaptureDataBilibili;
 import com.example.HjwJames.packetCapture.bean.CssQuery;
+import com.example.HjwJames.packetCapture.bean.ExceptionData;
+import com.example.HjwJames.packetCapture.dao.ExceptionDataDao;
 import com.example.HjwJames.packetCapture.service.CaptureDataService;
 import com.example.HjwJames.packetCapture.service.PacketCaptureService;
 import org.jsoup.Jsoup;
@@ -14,13 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class PacketCaptureServiceImpl implements PacketCaptureService {
     @Autowired
     CaptureDataService captureDataService;
+    @Autowired
+    ExceptionDataDao exceptionDataDao;
     /**
      * 主算法
      * @param url
@@ -53,9 +55,9 @@ public class PacketCaptureServiceImpl implements PacketCaptureService {
                 result += captureData.toString();
                 result += "--------------------------------------------------------------------------</br>";
             }
-
             captureDataService.batchSaveCaptureData(captureDatalist);
         }catch (Exception e){
+            exceptionDataDao.insert(new ExceptionData(null,this.getClass().getName(),Thread.currentThread() .getStackTrace()[1].getMethodName(),null,e.toString(),null));
             e.printStackTrace();
         }
         return result;

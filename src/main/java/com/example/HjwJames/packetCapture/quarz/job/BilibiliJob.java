@@ -1,6 +1,8 @@
 package com.example.HjwJames.packetCapture.quarz.job;
 
 import com.example.HjwJames.packetCapture.bean.CssQuery;
+import com.example.HjwJames.packetCapture.bean.ExceptionData;
+import com.example.HjwJames.packetCapture.dao.ExceptionDataDao;
 import com.example.HjwJames.packetCapture.service.PacketCaptureService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -14,12 +16,20 @@ import java.util.List;
 public class BilibiliJob implements Job {
     @Autowired
     PacketCaptureService packetCaptureService;
+    @Autowired
+    ExceptionDataDao exceptionDataDao;
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        bilibili("30");
-        bilibili("7");
-        bilibili("3");
-        System.out.println("BilibiliJob执行抓包：" + LocalDateTime.now());
+        try{
+            bilibili("30");
+            bilibili("7");
+            bilibili("3");
+            System.out.println("BilibiliJob执行抓包：" + LocalDateTime.now());
+        }catch (Exception e){
+            exceptionDataDao.insert(new ExceptionData(null,this.getClass().getName(),Thread.currentThread() .getStackTrace()[1].getMethodName(),null,e.toString(),null));
+            throw e;
+        }
+
     }
     public void bilibili(String days){
         //找到item
