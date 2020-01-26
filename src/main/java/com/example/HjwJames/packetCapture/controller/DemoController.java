@@ -1,9 +1,12 @@
 package com.example.HjwJames.packetCapture.controller;
 
+import com.example.HjwJames.packetCapture.quarz.service.JobService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
+    @Autowired
+    JobService jobService;
+
     @RequestMapping(value="/demo",method = RequestMethod.GET)
     public String demo(){
         String result = "<h1>Capture from http://news.qq.com/world_index.shtml</h1></br>";
@@ -30,7 +36,7 @@ public class DemoController {
         return result;
     }
 
-    @RequestMapping(value="/qqw",method = RequestMethod.GET)
+    @RequestMapping(value="/qq",method = RequestMethod.GET)
     public String qq(){
         String result = "<h1>Capture from https://new.qq.com/ch/world/</h1></br>";
         try {
@@ -49,5 +55,13 @@ public class DemoController {
             e.printStackTrace();
         }
         return result;
+    }
+    @RequestMapping(value="/quarz",method = RequestMethod.GET)
+    public void quarz(){
+        try {
+            jobService.quartzTest();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
