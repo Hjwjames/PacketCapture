@@ -31,7 +31,7 @@ public class CaptureController {
         String url = "https://new.qq.com/ch/world/";
         //String outputElement = "a[class=title]";
         List<CssQuery> resultList = new ArrayList<>();
-        resultList.add(new CssQuery("h3","","text",""));
+        resultList.add(new CssQuery("h3","","text","TITLE"));
         return packetCaptureService.capture(url,itemList,itemDetailList,resultList);
     }
     @RequestMapping(value="/bilibili",method = RequestMethod.GET)

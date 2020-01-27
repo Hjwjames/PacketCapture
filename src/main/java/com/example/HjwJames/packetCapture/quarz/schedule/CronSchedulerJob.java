@@ -27,6 +27,7 @@ public class CronSchedulerJob {
         // 每5小时执行一次
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0/5 * * ? *");
         //CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/20 * * * * ? *");
+        //CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0/30 * * * ? ");
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group2")
                 .usingJobData("name","Bilibili").withSchedule(scheduleBuilder).build();
         scheduler.scheduleJob(jobDetail,cronTrigger);
