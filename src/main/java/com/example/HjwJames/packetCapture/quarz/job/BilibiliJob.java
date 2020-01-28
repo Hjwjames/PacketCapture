@@ -22,10 +22,14 @@ public class BilibiliJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         try{
             bilibili("30");
+            Thread.currentThread().sleep(3000);
             bilibili("7");
+            Thread.currentThread().sleep(3000);
             bilibili("3");
             System.out.println("BilibiliJob执行抓包：" + LocalDateTime.now());
-        }catch (Exception e){
+        }catch (InterruptedException ex) {
+            exceptionDataDao.insert(new ExceptionData(null,this.getClass().getName(),Thread.currentThread() .getStackTrace()[1].getMethodName(),null,ex.toString(),null));
+        } catch (Exception e){
             exceptionDataDao.insert(new ExceptionData(null,this.getClass().getName(),Thread.currentThread() .getStackTrace()[1].getMethodName(),null,e.toString(),null));
             throw e;
         }

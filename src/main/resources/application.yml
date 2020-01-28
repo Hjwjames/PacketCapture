@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8060
   # 下面这个参数是为解决问题而新增的
   tomcat:
     max-http-header-size: 8192
