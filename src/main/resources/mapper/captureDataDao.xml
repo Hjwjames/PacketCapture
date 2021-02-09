@@ -12,16 +12,6 @@
         WHERE
         id = #{id}
     </select>
-   <!-- <insert id="insertOrUpdate_List" parameterType="java.util.List">
-        insert into Capture_Data (ID,TITLE,POINTS,PLAY_TIMES,BULLET,UPLOADER,URL,SOURCE,CREATE_DATE,UPDATE_DATE)
-        values
-        <foreach collection ="list" item="list" separator="," >
-            (#{list.id},#{list.title},#{list.points},#{list.playTimes},#{list.bullet},#{list.uploader},#{list.url},#{list.source},NOW(),NOW())
-        </foreach>
-        ON DUPLICATE KEY UPDATE
-        POINTS = VALUES(points),PLAY_TIMES = VALUES(PLAY_TIMES),BULLET = VALUES(bullet) ,
-        UPDATE_TIMES = VALUES(UPDATE_TIMES)+1,CREATE_DATE = VALUES(CREATE_DATE),UPDATE_DATE = NOW()
-    </insert>-->
     <insert id="insertOrUpdate_List" parameterType="java.util.List">
         insert into Capture_Data (ID,TITLE,POINTS,PLAY_TIMES,BULLET,UPLOADER,URL,SOURCE,CREATE_DATE,UPDATE_DATE)
         values
